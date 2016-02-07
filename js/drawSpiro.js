@@ -23,26 +23,47 @@ $('.advanced-link').on('click', function (){
 $('#Resolution').on('change', function(){
     $('#Resolution-val').val($('#Resolution').val());       
 });
+$('#Resolution-val').on('change', function(){
+    $('#Resolution').val($('#Resolution-val').val());       
+});
+
 
 $('#Ring-gear').on('change', function(){
     $('#Ring-gear-val').val($('#Ring-gear').val()); 
 	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
 });
 
+$('#Ring-gear-val').on('change', function(){
+    $('#Ring-gear').val($('#Ring-gear-val').val()); 
+	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
+});
+
+
 $('#Rolling-gear').on('change', function(){
 	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
     $('#Rolling-gear-val').val($('#Rolling-gear').val());  
-	//$('#Offset').attr('max', $('#Rolling-gear').val()- 1);
+	
 });
+$('#Rolling-gear-val').on('change', function(){
+	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+    $('#Rolling-gear').val($('#Rolling-gear-val').val());  
+	
+});
+
 
 $('#Offset').on('change', function(){
     $('#Offset-val').val($('#Offset').val());         
+});
+$('#Offset-val').on('change', function(){
+    $('#Offset').val($('#Offset-val').val());         
 });
 
 $('#Revs').on('change', function(){
     $('#Revs-val').val($('#Revs').val());         
 });
-
+$('#Revs-val').on('change', function(){
+    $('#Revs').val($('#Revs-val').val());         
+});
 
 $('#draw').click(function() {
 	
@@ -72,6 +93,7 @@ $('#draw').click(function() {
 	//$('#Revs-val').text(Revs);
 	var size = parseFloat($('#Size').val()); 
 	SafeZ = parseFloat($('#SafeZ').val());
+	console.log(SafeZ)
 	var CutDepth = parseFloat($('#CutDepth').val());
 	var inside  
 	
@@ -126,7 +148,7 @@ $('#draw').click(function() {
             iterCount = 1
 			
 			headerCode.push(
-				"M2," + (prevx * scalefactor) + "," + (prevy + scalefactor),
+				"M2," + (prevx * scalefactor).toFixed(3) + "," + (prevy + scalefactor).toFixed(3),
 				"MZ," + CutDepth
 				)
 			}
@@ -144,7 +166,7 @@ $('#draw').click(function() {
 			prevx = XCoord;
 			prevy = YCoord;
 			headerCode.push(
-			"M2," + (prevx * scalefactor) + "," + (prevy * scalefactor)
+			"M2," + (prevx * scalefactor).toFixed(3) + "," + (prevy * scalefactor).toFixed(3)
 			)
 
 			}

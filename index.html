@@ -28,8 +28,8 @@
 
               <div class="pure-menu pure-menu-horizontal">
                 <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link basic-link">Beam settings</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link advanced-link">Advanced</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link basic-link">Design</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link advanced-link">Cutting</a></li>
                 </ul>
               </div>
               <div class='content'>
@@ -57,14 +57,14 @@
                         <input id="Revs-val" type="number" max="1000" min="1"   value="25" data-parsley-trigger = "change"><br>                     
 					  </div>
 					  <div class="pure-control-group">
-                        <label for="hole-diameter">Resolution (number of segments/revolution)</label>
+                        <label for="Resolution">Resolution (number of segments/revolution)</label>
                         <input id="Resolution" type="range" step="1" data-parsley-required="true" placeholder="Hole Diameter" max="1000" data-parsley-min="1" value="175"  data-parsley-trigger = "change" >
                         <input id="Resolution-val" type="number" max="1000" min="1" value="175"  data-parsley-trigger = "change"><br>                      
 					  
 					  </div>
 					  <div class="pure-control-group">
                         <label for="Size">Overall Cut Size</label>
-                        <input id="Size" type="number" step="1" step="0.01" min="0.1" value="6"  data-parsley-trigger = "change" >
+                        <input id="Size" type="number" step="0.01" max="1000" min="0.1" value="6"  data-parsley-trigger = "change" >
                         <br>                     
 					  
 					  </div>
@@ -77,20 +77,20 @@
                         <input type="radio" name= "insideoutside" id="radioInside" value="inside"> Inside the ring gear?<br>
 						
                       </div>
-					  
-                    </div> <!-- /basic -->
-					<div class="advanced start-hidden">
+					 </div> <!-- /basic -->
+
+                    <div class="advanced start-hidden">
                       <div class="pure-control-group"> 
                         <label for="feed-rate">Cut Speed</label>
-                        <input class="lockable" id="cut-speed" type="number" step="0.1" data-parsley-required="true"  placeholder="Feed Rate" data-parsley-max="6" data-parsley-min="0.1"    value="2"  data-parsley-trigger = "change">
+                        <input class="lockable" id="cut-speed" type="number" step="0.1"  max="6" min="0.1" value="2"  data-parsley-trigger = "change">
                       </div>
                       <div class="pure-control-group"> 
-                        <label for="thru-cut">Cut Depth</label>
-                        <input  id="cut-depth" type="number" step="0.01" data-parsley-required="true"  placeholder="Feed Rate" max="5" min="-5"   value="0"  data-parsley-trigger = "change">
+                        <label for="CutDepth">Cut Depth</label>
+                        <input  id="CutDepth" type="number" step="0.01"  max="5" min="-5"   value="-0.05"  data-parsley-trigger = "change">
                       </div>
                       <div class="pure-control-group"> 
-                        <label for="safe-Z">Safe Z (in)</label>
-                        <input class="lockable" id="safe-Z" type="number" step="0.05" data-parsley-required="true"  placeholder="Feed Rate" data-parsley-max="6" data-parsley-min="0"    value=".25"  data-parsley-trigger = "change">
+                        <label for="SafeZ">Safe Z (in)</label>
+                        <input id="SafeZ" type="number" step="0.05" max="6" min="0" value=".25"  data-parsley-trigger = "change">
                       </div>        
                     </div>  <!-- advanced -->
 
