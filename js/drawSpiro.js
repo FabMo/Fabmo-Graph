@@ -1,4 +1,5 @@
 var headerCode 
+var SafeZ
 
 $('.basic-link').on('click', function (){
 	$('.basic').show();
@@ -41,6 +42,8 @@ $('#Offset').on('change', function(){
 $('#Revs').on('change', function(){
     $('#Revs-val').val($('#Revs').val());         
 });
+
+
 $('#draw').click(function() {
 	
 
@@ -67,8 +70,9 @@ $('#draw').click(function() {
 	//$('#Offset-val').text(Offset);	
 	var Revs = parseFloat($('#Revs').val()); //Val(Form1.txtRevs.Text)
 	//$('#Revs-val').text(Revs);
-	//var scalefactor = parseFloat($('#hole-diameter').val()); //(Form1.txtZoom.Text) / 100
-
+	var size = parseFloat($('#Size').val()); 
+	SafeZ = parseFloat($('#SafeZ').val());
+	var CutDepth = parseFloat($('#CutDepth').val());
 	var inside  
 	
     if ($('#radioInside').prop('checked')) {
@@ -79,22 +83,23 @@ $('#draw').click(function() {
 		{
         radius = Ring + Rolling
         inside = -1
-		}
+	}
+    var scalefactor = size / ((radius + Rolling + Offset)*2);
 
 	headerCode = [ 
 		"' File created by ShopBot-O-Graph v1.00",
         "' Copyright 2016 Bill Young and ShopBot Tools ",
         "'",
         "' Pattern is centered at 0,0",
-        //"' and is " + txtSize.Text; " in diameter"
+        "' and is " + size + " in diameter",
         "'",
         "' Ring gear radius... " + Ring,
-        "' rolling gear radius... " + Rolling,
-        "' offset %... " + Offset,
+        "' Rolling gear radius... " + Rolling,
+        "' Offset %... " + Offset,
         "' # of revolutions... " + Revs,
         "' # of line segments per revolution... " + segnum,
         "'",
-		"MZ, .25",
+		"MZ," + SafeZ,
         "SO,1,1",
 		"PAUSE 2",
 		"'"
@@ -109,7 +114,7 @@ $('#draw').click(function() {
 		
         XCoord = (radius * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((radius / Rolling) * count))))
         YCoord = 0 - ((radius * Math.sin(count)) - (Rolling + Offset) * Math.sin(((radius / Rolling) * count)))
-	
+
 		
         if (Math.abs(XCoord) > maxValue) {
 			maxValue = XCoord
@@ -121,8 +126,8 @@ $('#draw').click(function() {
             iterCount = 1
 			
 			headerCode.push(
-				"M2," + prevx + "," + prevy,
-				"MZ, -0.1" 
+				"M2," + (prevx * scalefactor) + "," + (prevy + scalefactor),
+				"MZ," + CutDepth
 				)
 			}
 		else{
@@ -139,7 +144,7 @@ $('#draw').click(function() {
 			prevx = XCoord;
 			prevy = YCoord;
 			headerCode.push(
-			"M2," + prevx + "," + prevy
+			"M2," + (prevx * scalefactor) + "," + (prevy * scalefactor)
 			)
 
 			}
@@ -148,7 +153,7 @@ $('#draw').click(function() {
 	});
  $('#submit').on('click', function (){
 	 headerCode.push(
-	 "MZ, -0.1"
+	 "MZ," + SafeZ
 	 )
 	 var ShopBotCode = headerCode.join('\n');
 				fabmoDashboard.submitJob(ShopBotCode, {filename : 'sbograph.sbp'}
