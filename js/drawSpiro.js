@@ -29,23 +29,34 @@ $('#Resolution-val').on('change', function(){
 
 
 $('#Ring-gear').on('change', function(){
+
     $('#Ring-gear-val').val($('#Ring-gear').val()); 
-	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		$('#Rolling-gear-val').val($('#Rolling-gear').val());
+		};
 });
 
 $('#Ring-gear-val').on('change', function(){
     $('#Ring-gear').val($('#Ring-gear-val').val()); 
-	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
+		$('#Rolling-gear-val').val($('#Rolling-gear').val());
+		};
 });
 
 
 $('#Rolling-gear').on('change', function(){
-	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		};
     $('#Rolling-gear-val').val($('#Rolling-gear').val());  
 	
 });
 $('#Rolling-gear-val').on('change', function(){
-	$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		};
     $('#Rolling-gear').val($('#Rolling-gear-val').val());  
 	
 });
@@ -65,63 +76,71 @@ $('#Revs-val').on('change', function(){
     $('#Revs').val($('#Revs-val').val());         
 });
 
+$('#radioInside').on('change', function(){
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		};
+	$('#Rolling-gear-val').val($('#Rolling-gear').val()); 
+});
+
 $('#draw').click(function() {
 	
-
-    var worksheetCanvas = $('#worksheet-canvas');
-    var context = worksheetCanvas.get(0).getContext("2d");
-	context.clearRect(0, 0, 600, 600);
+	var previewWindow = 600 //hard coded at the moment..needs to be fixed	
 	
-	var screenoffsetX = 300
-	var screenoffsetY = 300
-	var twopi = 6.28318530717959
-	var iterCount = 0
-	var maxValue = 0
-    var radius	
-	
-    var segnum = parseFloat($('#Resolution').val());//Val(Form1.txtResolution.Text)
-   // $('#Resolution-val').text(segnum);	
-	var segment = twopi / segnum
+    var worksheetCanvas = $('#worksheet-canvas');	
+	var SpiroPrev = worksheetCanvas.get(0).getContext("2d");
 
-	var Ring = parseFloat($('#Ring-gear').val()); //Val(Form1.txtRing.Text) 
-    //$('#Ring-gear-val').text(Ring);  
-	var Rolling = parseFloat($('#Rolling-gear').val()); //Val(Form1.txtRolling.Text) 
-    //$('#Rolling-gear-val').text(Rolling);	
-	var Offset = (Rolling / 100) * parseFloat($('#Offset').val()); //Val(Form1.txtOffset.Text) 
-	//$('#Offset-val').text(Offset);	
-	var Revs = parseFloat($('#Revs').val()); //Val(Form1.txtRevs.Text)
-	//$('#Revs-val').text(Revs);
-	var size = parseFloat($('#Size').val()); 
-	SafeZ = parseFloat($('#SafeZ').val());
-	console.log(SafeZ)
+	SpiroPrev.clearRect(0, 0, previewWindow, previewWindow);	// clear the preview before every redraw
+	
+	var screenoffsetX = previewWindow / 2 
+	var screenoffsetY = previewWindow / 2
+	
+	var HasRun = 0
+	var MaxValue = 0 //not currently used
+    var GearOffset	
+	var inside	
+	
+    var Resolution = parseInt($('#Resolution').val());  	
+	var SegmentLength = (Math.PI * 2) / Resolution
+	var Ring = parseInt($('#Ring-gear').val());   
+	var Rolling = parseInt($('#Rolling-gear').val());  	
+	var Offset = (Rolling / 100) * parseFloat($('#Offset').val());  	
+	var Revs = parseFloat($('#Revs').val()); 
+	var CutSize = parseFloat($('#Size').val()); 
 	var CutDepth = parseFloat($('#CutDepth').val());
-	var inside  
+    var CutSpeed = parseFloat($('#CutSpeed').val());
 	
+	SafeZ = parseFloat($('#SafeZ').val());
+ 		
     if ($('#radioInside').prop('checked')) {
 		inside = 1		
-        radius = Ring - Rolling
+        GearOffset = Ring - Rolling
 		}
 		else
 		{
-        radius = Ring + Rolling
+        GearOffset = Ring + Rolling
         inside = -1
-	}
-    var scalefactor = size / ((radius + Rolling + Offset)*2);
+		}
+    
+	var CutScaleFactor = CutSize / ((GearOffset + Rolling + Offset)*2);
+	var PrevScaleFactor = previewWindow / ((GearOffset + Rolling + Offset)*2);
+
 
 	headerCode = [ 
 		"' File created by ShopBot-O-Graph v1.00",
         "' Copyright 2016 Bill Young and ShopBot Tools ",
         "'",
         "' Pattern is centered at 0,0",
-        "' and is " + size + " in diameter",
+        "' and is " + CutSize + " in diameter",
         "'",
         "' Ring gear radius... " + Ring,
         "' Rolling gear radius... " + Rolling,
         "' Offset %... " + Offset,
         "' # of revolutions... " + Revs,
-        "' # of line segments per revolution... " + segnum,
+        "' # of line segments per revolution... " + Resolution,
         "'",
 		"MZ," + SafeZ,
+		"MS," + CutSpeed,
         "SO,1,1",
 		"PAUSE 2",
 		"'"
@@ -129,44 +148,40 @@ $('#draw').click(function() {
 
 	var count
 	var XCoord 
-	var YCoord 
-	var prevx
-    var prevy	
-	for (count = 0; count < Revs; count = (count + segment)) { 
+	var YCoord 	
+	var PreviousX
+    var PreviousY	
+	for (count = 0; count < Revs; count = (count + SegmentLength)) { 
 		
-        XCoord = (radius * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((radius / Rolling) * count))))
-        YCoord = 0 - ((radius * Math.sin(count)) - (Rolling + Offset) * Math.sin(((radius / Rolling) * count)))
+        XCoord = (GearOffset * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((GearOffset / Rolling) * count))))
+        YCoord = 0 - ((GearOffset * Math.sin(count)) - (Rolling + Offset) * Math.sin(((GearOffset / Rolling) * count)))
 
-		
-        if (Math.abs(XCoord) > maxValue) {
-			maxValue = XCoord
+/*		Find extremes...not used anywhere so far
+        if (Math.abs(XCoord) > MaxValue) {
+			MaxValue = XCoord  
 		}
-			console.log(iterCount);		
-        if (iterCount == 0) {
-            prevx = XCoord
-            prevy = YCoord
-            iterCount = 1
+*/					
+        if (HasRun == 0) {
+            PreviousX = XCoord
+            PreviousY = YCoord
+            HasRun = 1
 			
 			headerCode.push(
-				"M2," + (prevx * scalefactor).toFixed(3) + "," + (prevy + scalefactor).toFixed(3),
+				"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY + CutScaleFactor).toFixed(3),
 				"MZ," + CutDepth
 				)
 			}
 		else{
  
-			var c = document.getElementById("worksheet-canvas");
-			var ctx= c.getContext("2d");
-
-			
-			ctx.beginPath();
-			ctx.moveTo(prevx + screenoffsetX, prevy + screenoffsetY);
-			ctx.lineTo(XCoord + screenoffsetX, YCoord + screenoffsetY);
-			context.strokeStyle = "rgb(180,180,180)";
-			ctx.stroke();
-			prevx = XCoord;
-			prevy = YCoord;
+			SpiroPrev.beginPath();
+			SpiroPrev.moveTo((PreviousX * PrevScaleFactor) + screenoffsetX, (PreviousY * PrevScaleFactor) + screenoffsetY);
+			SpiroPrev.lineTo((XCoord * PrevScaleFactor) + screenoffsetX, (YCoord *PrevScaleFactor) + screenoffsetY);
+			SpiroPrev.strokeStyle = "rgb(180,180,180)";
+			SpiroPrev.stroke();
+			PreviousX = XCoord;
+			PreviousY = YCoord;
 			headerCode.push(
-			"M2," + (prevx * scalefactor).toFixed(3) + "," + (prevy * scalefactor).toFixed(3)
+			"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY * CutScaleFactor).toFixed(3)
 			)
 
 			}
@@ -177,6 +192,7 @@ $('#draw').click(function() {
 	 headerCode.push(
 	 "MZ," + SafeZ
 	 )
+	 
 	 var ShopBotCode = headerCode.join('\n');
 				fabmoDashboard.submitJob(ShopBotCode, {filename : 'sbograph.sbp'}
 										

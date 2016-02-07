@@ -63,26 +63,24 @@
 					  
 					  </div>
 					  <div class="pure-control-group">
-                        <label for="Size">Overall Cut Size</label>
+                        <label for="Size">Maximum Cut Size.</label>
                         <input id="Size" type="number" step="0.01" max="1000" min="0.1" value="6"  data-parsley-trigger = "change" >
                         <br>                     
 					  
 					  </div>
          
                       <div class="pure-control-group"> 
-						Where does the Rolling Gear roll?<P> 
-
-                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> Outside the ring gear?
+						<label for="insideoutside">Where should the Rolling Gear roll?</label> 
+                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> Around the outside of the ring gear?
 						<br>
-                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> Inside the ring gear?<br>
-						
+                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> Around the inside of the ring gear?<br>						
                       </div>
 					 </div> <!-- /basic -->
 
                     <div class="advanced start-hidden">
                       <div class="pure-control-group"> 
                         <label for="feed-rate">Cut Speed</label>
-                        <input class="lockable" id="cut-speed" type="number" step="0.1"  max="6" min="0.1" value="2"  data-parsley-trigger = "change">
+                        <input class="lockable" id="CutSpeed" type="number" step="0.1"  max="6" min="0.1" value="2"  data-parsley-trigger = "change">
                       </div>
                       <div class="pure-control-group"> 
                         <label for="CutDepth">Cut Depth</label>
