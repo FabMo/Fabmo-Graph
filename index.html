@@ -75,6 +75,9 @@
 						<br>
                         <input type="radio" name= "insideoutside" id="radioInside" value="inside"> Around the inside of the ring gear?<br>						
                       </div>
+					  <div style="margin-top: 10px;">
+						<button  id="draw" type='submit'>Draw</button>
+					  </div> 
 					 </div> <!-- /basic -->
 
                     <div class="advanced start-hidden">
@@ -89,15 +92,19 @@
                       <div class="pure-control-group"> 
                         <label for="SafeZ">Safe Z (in)</label>
                         <input id="SafeZ" type="number" step="0.05" max="6" min="0" value=".25"  data-parsley-trigger = "change">
-                      </div>        
-                    </div>  <!-- advanced -->
-
-                    <div style="margin-top: 10px;">
-                      <button  id="draw" type='submit'>Draw</button>
-                    </div>                    
+                      </div>  
                     <div style="margin-top: 10px;">
                       <button  id="submit" type='submit' >Submit</button>
+                    </div>					
+					<!-- advanced -->
+					  
                     </div>
+
+					
+
+
+                   
+
                   </fieldset>
                 </form>
              
@@ -114,7 +121,10 @@
     </div>
        
     <script src="js/lib/jquery.min.js"></script>
-    <script src="js/lib/dashboard.js"></script>
+    <script src="js/lib/fabmo.js"></script>
+	<script type="text/javascript">
+		var fabmo = new FabMoDashboard();
+	</script>
     <script src="js/lib/parsley.min.js"></script>
     <script src="js/drawSpiro.js"></script>	
 

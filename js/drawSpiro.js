@@ -192,10 +192,15 @@ $('#draw').click(function() {
 	 headerCode.push(
 	 "MZ," + SafeZ
 	 )
-	 
 	 var ShopBotCode = headerCode.join('\n');
-				fabmoDashboard.submitJob(ShopBotCode, {filename : 'sbograph.sbp'}
-										
-             );	
+	 fabmo.submitJob({
+            file: ShopBotCode,
+            filename : 'sbograph.sbp',
+            name : 'ShopBot-O-Graph',
+            description : 'Cut a Spirograph pattern' 
+        });
+//	 var ShopBotCode = headerCode.join('\n');
+//				fabmoDashboard.submitJob(ShopBotCode, {filename : 'sbograph.sbp'}
+//             );	
 	});	 
  
