@@ -1,6 +1,6 @@
 var headerCode 
 var SafeZ
-
+draw();
 $('.basic-link').on('click', function (){
 	$('.basic').show();
 	$('.advanced').hide();
@@ -21,10 +21,12 @@ $('.advanced-link').on('click', function (){
 	$('.basic + ul').hide();
 });
 $('#Resolution').on('change', function(){
-    $('#Resolution-val').val($('#Resolution').val());       
+    $('#Resolution-val').val($('#Resolution').val());
+     draw ();       
 });
 $('#Resolution-val').on('change', function(){
-    $('#Resolution').val($('#Resolution-val').val());       
+    $('#Resolution').val($('#Resolution-val').val());  
+     draw ();     
 });
 
 
@@ -35,6 +37,7 @@ $('#Ring-gear').on('change', function(){
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
 		$('#Rolling-gear-val').val($('#Rolling-gear').val());
 		};
+         draw ();
 });
 
 $('#Ring-gear-val').on('change', function(){
@@ -43,6 +46,7 @@ $('#Ring-gear-val').on('change', function(){
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);	
 		$('#Rolling-gear-val').val($('#Rolling-gear').val());
 		};
+         draw ();
 });
 
 
@@ -50,30 +54,36 @@ $('#Rolling-gear').on('change', function(){
 	if ($('#radioInside').prop('checked')) {
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
 		};
-    $('#Rolling-gear-val').val($('#Rolling-gear').val());  
+    $('#Rolling-gear-val').val($('#Rolling-gear').val());
+     draw ();  
 	
 });
 $('#Rolling-gear-val').on('change', function(){
 	if ($('#radioInside').prop('checked')) {
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
 		};
-    $('#Rolling-gear').val($('#Rolling-gear-val').val());  
+    $('#Rolling-gear').val($('#Rolling-gear-val').val());
+     draw ();  
 	
 });
 
 
 $('#Offset').on('change', function(){
-    $('#Offset-val').val($('#Offset').val());         
+    $('#Offset-val').val($('#Offset').val());
+     draw ();         
 });
 $('#Offset-val').on('change', function(){
-    $('#Offset').val($('#Offset-val').val());         
+    $('#Offset').val($('#Offset-val').val());
+     draw ();         
 });
 
 $('#Revs').on('change', function(){
-    $('#Revs-val').val($('#Revs').val());         
+    $('#Revs-val').val($('#Revs').val()); 
+     draw ();        
 });
 $('#Revs-val').on('change', function(){
-    $('#Revs').val($('#Revs-val').val());         
+    $('#Revs').val($('#Revs-val').val());
+     draw ();         
 });
 
 $('#radioInside').on('change', function(){
@@ -81,10 +91,11 @@ $('#radioInside').on('change', function(){
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
 		};
 	$('#Rolling-gear-val').val($('#Rolling-gear').val()); 
+    draw ();
 });
 
-$('#draw').click(function() {
-	
+    
+ function draw () {
 	var previewWindow = 600 //hard coded at the moment..needs to be fixed	
 	
     var worksheetCanvas = $('#worksheet-canvas');	
@@ -187,7 +198,7 @@ $('#draw').click(function() {
 			}
 
         };
-	});
+	};
  $('#submit').on('click', function (){
 	 headerCode.push(
 	 "MZ," + SafeZ
