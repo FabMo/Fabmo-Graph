@@ -82,6 +82,22 @@ $('#Revs-val').on('change', function(){
      draw ();         
 });
 
+$('.exit-modal').on('click', function() {
+  $('.modal, .modal-container').fadeOut('fast');
+});
+
+$('#ringHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/outside.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+      $('.settings').hide();
+});
+
+$('#rollingHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/inside.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+      $('.settings').hide();
+});
+
 $('#radioInside').on('change', function(){
 	if ($('#radioInside').prop('checked')) {
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
@@ -107,6 +123,9 @@ $('#radioOutside').on('change', function(){
 });
     
  function draw () {
+     
+     
+     
 	var previewWindow = 600 //hard coded at the moment..needs to be fixed	
 	
     var worksheetCanvas = $('#worksheet-canvas');	

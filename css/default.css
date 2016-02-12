@@ -32,7 +32,10 @@ canvas{
  		 box-sizing: border-box;
 }
 
-
+img {
+    display: inline-block;
+    padding-left: 25px;
+}
 
 .depth-id{
 	position: absolute;

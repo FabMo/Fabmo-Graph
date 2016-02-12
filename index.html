@@ -39,27 +39,27 @@
                       <div class="pure-control-group">
                         <label for="Ring-gear">Ring Gear (number of teeth)</label>			
                         <input id="Ring-gear" type="range" step="1" data-parsley-required="true" placeholder="Ring Gear" max="150" min="1" value="100"  data-parsley-trigger = "change" >
-						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change"><br>
+						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change">
 					  </div>          
                       <div class="pure-control-group">
                         <label for="beam-width">Rolling Gear (number of teeth)</label>
                         <input id="Rolling-gear" type="range" step="1" data-parsley-required="true" placeholder="Beam Width" max="149" min="1" value="24" data-parsley-trigger = "change" >
-                      	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change"><br>
+                      	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change">
 					  </div>          
                       <div class="pure-control-group">
                         <label for="hole-spacing">Offset (% offset from center of rolling gear)</label>
                         <input id="Offset" type="range" step="1" data-parsley-required="true"  placeholder="Hole Spacing" max="100" min="1" value="50" data-parsley-trigger = "change">
-                        	<input id="Offset-val" type="number" max="100" min="0" value="50" data-parsley-trigger = "change"><br>                    
+                        	<input id="Offset-val" type="number" max="100" min="0" value="50" data-parsley-trigger = "change">                    
 					  </div>
                       <div class="pure-control-group"> 
                         <label for="thickness">Revolutions (full revolutions of rolling gear)</label>
                         <input id="Revs" type="range" step="1" data-parsley-required="true"  placeholder="Material Thickness" max="1000" min="1"   value="25" data-parsley-trigger = "change" >
-                        <input id="Revs-val" type="number" max="1000" min="1"   value="25" data-parsley-trigger = "change"><br>                     
+                        <input id="Revs-val" type="number" max="1000" min="1"   value="25" data-parsley-trigger = "change">                     
 					  </div>
 					  <div class="pure-control-group">
                         <label for="Resolution">Resolution (number of segments/revolution)</label>
                         <input id="Resolution" type="range" step="1" data-parsley-required="true" placeholder="Hole Diameter" max="1000" data-parsley-min="1" value="175"  data-parsley-trigger = "change" >
-                        <input id="Resolution-val" type="number" max="1000" min="1" value="175"  data-parsley-trigger = "change"><br>                      
+                        <input id="Resolution-val" type="number" max="1000" min="1" value="175"  data-parsley-trigger = "change">                      
 					  
 					  </div>
 					  <div class="pure-control-group">
@@ -71,9 +71,9 @@
          
                       <div class="pure-control-group"> 
 						<label for="insideoutside">Where should the Rolling Gear roll?</label> 
-                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear?
+                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear? <img id="ringHelp" src="images/help.png">
 						<br>
-                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?<br>						
+                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?	<img  id="rollingHelp" src="images/help.png">					
                       </div>
 					  
 					 </div> <!-- /basic -->
