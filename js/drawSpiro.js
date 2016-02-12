@@ -4,8 +4,6 @@ draw();
 $('.basic-link').on('click', function (){
 	$('.basic').show();
 	$('.advanced').hide();
-	//$('.lock').hide();
-	//$('.unlock').hide();
 	$('.advanced').attr("disabled", "true");
 	$('.advanced + ul').hide();
 	$('.basic + ul').show();
@@ -13,8 +11,6 @@ $('.basic-link').on('click', function (){
 $('.advanced-link').on('click', function (){
 	$('.basic').hide();
 	$('.advanced').show();
-	//$('.lock').show();
-	//$('.unlock').hide();
 	$('.advanced').attr("disabled", "true");
 	$('.parsley-required').hide();
 	$('.advanced + ul').show();
