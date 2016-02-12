@@ -89,11 +89,26 @@ $('#Revs-val').on('change', function(){
 $('#radioInside').on('change', function(){
 	if ($('#radioInside').prop('checked')) {
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
-		};
+		}
+        else {          
+           $('#Rolling-gear').attr('max', 150); 
+        }
 	$('#Rolling-gear-val').val($('#Rolling-gear').val()); 
     draw ();
 });
 
+$('#radioOutside').on('change', function(){
+	if ($('#radioInside').prop('checked')) {
+		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		}
+        else {
+            
+           $('#Rolling-gear').attr('max', 150); 
+        }
+        
+	$('#Rolling-gear-val').val($('#Rolling-gear').val()); 
+    draw ();
+});
     
  function draw () {
 	var previewWindow = 600 //hard coded at the moment..needs to be fixed	
