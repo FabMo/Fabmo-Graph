@@ -39,12 +39,12 @@
                       <div class="pure-control-group">
                         <label for="Ring-gear">Ring Gear (number of teeth)</label>			
                         <input id="Ring-gear" type="range" step="1" data-parsley-required="true" placeholder="Ring Gear" max="150" min="1" value="100"  data-parsley-trigger = "change" >
-						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change">
+						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change"><img id="ringHelp" src="images/help.png">
 					  </div>          
                       <div class="pure-control-group">
                         <label for="beam-width">Rolling Gear (number of teeth)</label>
                         <input id="Rolling-gear" type="range" step="1" data-parsley-required="true" placeholder="Beam Width" max="149" min="1" value="24" data-parsley-trigger = "change" >
-                      	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change">
+                      	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change"><img id="rollingHelp" src="images/help.png">
 					  </div>          
                       <div class="pure-control-group">
                         <label for="hole-spacing">Offset (% offset from center of rolling gear)</label>
@@ -71,9 +71,9 @@
          
                       <div class="pure-control-group"> 
 						<label for="insideoutside">Where should the Rolling Gear roll?</label> 
-                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear? <img id="ringHelp" src="images/help.png">
+                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear? <img id="outsideHelp" src="images/help.png">
 						<br>
-                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?	<img  id="rollingHelp" src="images/help.png">					
+                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?	<img  id="insideHelp" src="images/help.png">					
                       </div>
 					  
 					 </div> <!-- /basic -->

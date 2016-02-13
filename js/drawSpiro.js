@@ -84,15 +84,28 @@ $('#Revs-val').on('change', function(){
 
 $('.exit-modal').on('click', function() {
   $('.modal, .modal-container').fadeOut('fast');
+  $('.settings').show();
 });
 
 $('#ringHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/ring.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+      $('.settings').hide();
+});
+$('#rollingHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/rolling.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+      $('.settings').hide();
+});
+
+
+$('#outsideHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/outside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
       $('.settings').hide();
 });
 
-$('#rollingHelp').on('click', function(){
+$('#insideHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/inside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
       $('.settings').hide();

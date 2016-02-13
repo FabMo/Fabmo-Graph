@@ -116,8 +116,8 @@ input{
 
 .modal {
 	background-color: #eeeeee;
-	width: 250px;
-   	height: 250px;
+	width: auto;
+   	height: auto;
    	position: absolute;
    	left: 50%;
    	top: 50%; 
@@ -130,8 +130,8 @@ input{
 
 .modal-content {
 	background-color: #ffffff;
-	width: 220px;
-   	height: 220px;
+	width: auto;
+   	height: auto;
    	position: absolute;
    	left: 50%;
    	top: 50%; 
