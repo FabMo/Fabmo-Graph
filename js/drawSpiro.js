@@ -87,13 +87,13 @@ $('.exit-modal, .modal-container').on('click', function() {
   $('.settings').show();
 });
 
-$('#ringHelp').on('click', function(){
+$('#ringHelp, .help-q, .help-i').on('click', function(){
     $('.modal p').html('<img src="images/ring.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
-$('#rollingHelp').on('click', function(){
+$('#rollingHelp, .help-q, .help-i').on('click', function(){
     $('.modal-content p').html('<img src="images/rolling.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
@@ -101,14 +101,14 @@ $('#rollingHelp').on('click', function(){
 });
 
 
-$('#outsideHelp').on('click', function(){
+$('#outsideHelp, .help-q, .help-i').on('click', function(){
     $('.modal-content p').html('<img src="images/outside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
 
-$('#insideHelp').on('click', function(){
+$('#insideHelp, .help-q, .help-i').on('click', function(){
     $('.modal-content p').html('<img src="images/inside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});

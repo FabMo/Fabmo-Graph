@@ -37,6 +37,28 @@ canvas{
     padding-left: 10px;
 }
 
+.help-q, .help-i {
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 1000px;
+}
+.help-q:hover, .help-i:hover {
+	cursor: pointer;
+}
+.help-q p {
+	display: inline-block;
+	padding: .2rem .4rem;
+	font-size: 1em;
+	margin: 0;
+	font-weight: bold;
+}
+.help-i p {
+	display: inline-block;
+	padding: .2rem .55rem;
+	font-size: 1em;
+	margin: 0;
+	font-weight: bold;
+}
 .depth-id{
 	position: absolute;
     left: 103%;
