@@ -32,7 +32,7 @@ canvas{
  		 box-sizing: border-box;
 }
 
-img {
+.help-icon {
     display: inline-block;
     padding-left: 10px;
 }
@@ -65,7 +65,7 @@ img {
 		left: 5%;
 		bottom: -20%;
 		font-size: 1.2em;
-	}	
+	}
 }
 @media only screen and (max-width: 520px){
 	.depth-id{
@@ -79,7 +79,7 @@ img {
 		left: 5%;
 		bottom: -30%;
 		font-size: 1em;
-	}	
+	}
 }
 label{
 	display: block;
@@ -106,7 +106,7 @@ input{
 	padding-top: 1em;
 	padding-left: 1em;
     font-size: .8em;
-    
+
 }
 
 .content:children {
@@ -116,27 +116,35 @@ input{
 
 .modal {
 	background-color: #eeeeee;
-	width: auto;
+	/*width: auto;
    	height: auto;
    	position: absolute;
    	left: 50%;
-   	top: 50%; 
+   	top: 50%;
    	margin-left: -125px;
    	margin-top: -125px;
-   	z-index: 10;
-   	border-radius: 5px;
+
+   	border-radius: 5px;*/
+		z-index: 10;
 	display: none;
+	&:target {
+		&:before {
+			top:20%;
+		}
+	}
 }
 
 .modal-content {
 	background-color: #ffffff;
-	width: auto;
-   	height: auto;
-   	position: absolute;
-   	left: 50%;
-   	top: 50%; 
-   	margin-left: -110px;
-   	margin-top: -110px;
+	/*width: auto;
+  height: auto;*/
+  position: absolute;
+  left: 50%;
+  /*top: 50%;*/
+  /*margin-left: -110px;
+  margin-top: -110px;*/
+	margin-right: -50%;
+	transform: translate(-50%);
 	border-radius: 5px;
 }
 
@@ -155,13 +163,16 @@ input{
 	letter-spacing: 0em;
 	padding: 1em;
 }
+.exit {
+	text-align: center;
+}
 .exit-modal {
 	background-color: #32B433;
 	color: #eeeeee;
 	width: 50%;
-	margin-top: 20%;
-	margin-left: 25%;
-	margin-right: auto;
+	/*margin-top: 20%;*/
+	/*margin-left: 25%;*/
+	/*margin-right: auto;*/
 	border: 1px solid #32B433;
 	text-align: center;
 	margin-bottom: 1em;
