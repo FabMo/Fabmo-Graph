@@ -88,7 +88,7 @@ $('.exit-modal').on('click', function() {
 });
 
 $('#ringHelp').on('click', function(){
-    $('.modal-content p').html('<img src="images/ring.jpg">');
+    $('.modal p').html('<img src="images/ring.jpg">');
     	 $('.modal, .modal-container').fadeIn();
       $('.settings').hide();
 });
