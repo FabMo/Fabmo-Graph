@@ -88,6 +88,9 @@ canvas{
 		bottom: -20%;
 		font-size: 1.2em;
 	}
+	canvas {
+		/*height: 400px;*/
+	}
 }
 @media only screen and (max-width: 520px){
 	.depth-id{

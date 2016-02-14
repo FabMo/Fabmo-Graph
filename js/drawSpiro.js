@@ -93,7 +93,7 @@ $('#ringHelp, .help-q, .help-i').on('click', function(){
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
-$('#rollingHelp, .help-q, .help-i').on('click', function(){
+$('#rollingHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/rolling.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
@@ -101,14 +101,14 @@ $('#rollingHelp, .help-q, .help-i').on('click', function(){
 });
 
 
-$('#outsideHelp, .help-q, .help-i').on('click', function(){
+$('#outsideHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/outside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
 
-$('#insideHelp, .help-q, .help-i').on('click', function(){
+$('#insideHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/inside.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
@@ -146,8 +146,39 @@ $('#radioOutside').on('change', function(){
 
 	var previewWindow = 600 //hard coded at the moment..needs to be fixed
 
-    var worksheetCanvas = $('#worksheet-canvas');
+  var worksheetCanvas = $('#worksheet-canvas');
 	var SpiroPrev = worksheetCanvas.get(0).getContext("2d");
+
+
+//********** RESIZE CANVAS **********//
+// small < 768
+// medium 768 - 1022
+// lg > 1023
+	function resizeCanvas(){
+		if (window.innerWidth > 1022) {
+			// large screen, canvas 2/3
+			// var width = window.innerWidth*(2/3);
+			var width = window.innerWidth/2;
+		} else if (window.innerWidth > 767 && window.innerWidth < 1023) {
+			// medium screen, canvas 1/2 screen
+			var width = window.innerWidth/2;
+		} else if (window.innerWidth < 768) {
+			// small screen
+			var width = window.innerWidth;
+		}
+
+		console.log('width'+ width);
+		var ratio = worksheetCanvas.height()/worksheetCanvas.width();
+
+		var height = width;
+		console.log('height'+ height);
+			worksheetCanvas.width(width)
+			worksheetCanvas.height(height)
+	}
+
+	window.addEventListener('load', resizeCanvas, false);
+	window.addEventListener('resize', resizeCanvas, false);
+
 
 	SpiroPrev.clearRect(0, 0, previewWindow, previewWindow);	// clear the preview before every redraw
 
