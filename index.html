@@ -15,116 +15,110 @@
         <!-- Title/description -->
      <h1 class='title'>ShopBot-O-Graph</h1>
      <div class="pure-g">
-        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-3 image-container">
+      <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-3 image-container">
+				 <!-- <div class="worksheet"> -->
+  				<!-- <div id="canvas-holder"> -->
+    				<canvas id="worksheet-canvas" height="600" width="600"></canvas>
+          <!-- </div> -->
+        <!-- </div> -->
+  		</div>
+      <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+          <div class="pure-u-1 settings">
 
-				<div class="worksheet">
-				<div id="canvas-holder">
-				<canvas id="worksheet-canvas" width="600" height="600"></canvas>
-          </div>
-        </div>
-		</div>
-        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
-            <div class="pure-u-1 settings">
+            <div class="pure-menu pure-menu-horizontal">
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link basic-link">Design</a></li>
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link advanced-link">Cutting</a></li>
+              </ul>
+            </div>
+            <div class='content'>
+              <form class="pure-form pure-form basic-setting" data-parsley-validate>
+                <fieldset>
+                  <div class="basic">
+                    <div class="pure-control-group">
+                      <label for="Ring-gear">Ring Gear (number of teeth)</label>
+                      <input id="Ring-gear" type="range" step="1" data-parsley-required="true" placeholder="Ring Gear" max="150" min="1" value="100"  data-parsley-trigger = "change" >
+          						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change"><img id="ringHelp" class="help-icon" src="images/help.png">
+                      <div class="help-q">
+                        <p>?</p>
+                      </div>
+                      <div class="help-i">
+                        <p>i</p>
+                      </div>
+        					  </div>
+                    <div class="pure-control-group">
+                      <label for="beam-width">Rolling Gear (number of teeth)</label>
+                      <input id="Rolling-gear" type="range" step="1" data-parsley-required="true" placeholder="Beam Width" max="149" min="1" value="24" data-parsley-trigger = "change" >
+                    	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change"><img id="rollingHelp" class="help-icon" src="images/help.png">
+        					  </div>
+                    <div class="pure-control-group">
+                      <label for="hole-spacing">Offset (% offset from center of rolling gear)</label>
+                      <input id="Offset" type="range" step="1" data-parsley-required="true"  placeholder="Hole Spacing" max="100" min="1" value="50" data-parsley-trigger = "change">
+                    	<input id="Offset-val" type="number" max="100" min="0" value="50" data-parsley-trigger = "change">
+        					  </div>
+                    <div class="pure-control-group">
+                      <label for="thickness">Revolutions (full revolutions of rolling gear)</label>
+                      <input id="Revs" type="range" step="1" data-parsley-required="true"  placeholder="Material Thickness" max="1000" min="1"   value="25" data-parsley-trigger = "change" >
+                      <input id="Revs-val" type="number" max="1000" min="1"   value="25" data-parsley-trigger = "change">
+        					  </div>
+        					  <div class="pure-control-group">
+                      <label for="Resolution">Resolution (number of segments/revolution)</label>
+                      <input id="Resolution" type="range" step="1" data-parsley-required="true" placeholder="Hole Diameter" max="1000" min="2" value="175"  data-parsley-trigger = "change" >
+                      <input id="Resolution-val" type="number" max="1000" min="1" value="175"  data-parsley-trigger = "change">
+        					  </div>
+        					  <div class="pure-control-group">
+                      <label for="Size">Maximum Cut Size.</label>
+                      <input id="Size" type="number" step="0.01" max="1000" min="0.1" value="6"  data-parsley-trigger = "change" >
+        					  </div>
+                    <div class="pure-control-group">
+          						<label for="insideoutside">Where should the Rolling Gear roll?</label>
+                      <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear? <img id="outsideHelp" class="help-icon" src="images/help.png">
+                      <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?	<img  id="insideHelp" class="help-icon" src="images/help.png">
+                    </div>
+        					</div> <!-- /basic -->
 
-              <div class="pure-menu pure-menu-horizontal">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link basic-link">Design</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link advanced-link">Cutting</a></li>
-                </ul>
-              </div>
-              <div class='content'>
-                <form class="pure-form pure-form basic-setting" data-parsley-validate>
-                  <fieldset>
-                    <div class="basic">
-                      <div class="pure-control-group">
-                        <label for="Ring-gear">Ring Gear (number of teeth)</label>			
-                        <input id="Ring-gear" type="range" step="1" data-parsley-required="true" placeholder="Ring Gear" max="150" min="1" value="100"  data-parsley-trigger = "change" >
-						<input id="Ring-gear-val" type="number" max="150" min="1" value="100" data-parsley-trigger = "change"><img id="ringHelp" src="images/help.png">
-					  </div>          
-                      <div class="pure-control-group">
-                        <label for="beam-width">Rolling Gear (number of teeth)</label>
-                        <input id="Rolling-gear" type="range" step="1" data-parsley-required="true" placeholder="Beam Width" max="149" min="1" value="24" data-parsley-trigger = "change" >
-                      	<input id="Rolling-gear-val" type="number" max="149" min="1" value="24" data-parsley-trigger = "change"><img id="rollingHelp" src="images/help.png">
-					  </div>          
-                      <div class="pure-control-group">
-                        <label for="hole-spacing">Offset (% offset from center of rolling gear)</label>
-                        <input id="Offset" type="range" step="1" data-parsley-required="true"  placeholder="Hole Spacing" max="100" min="1" value="50" data-parsley-trigger = "change">
-                        	<input id="Offset-val" type="number" max="100" min="0" value="50" data-parsley-trigger = "change">                    
-					  </div>
-                      <div class="pure-control-group"> 
-                        <label for="thickness">Revolutions (full revolutions of rolling gear)</label>
-                        <input id="Revs" type="range" step="1" data-parsley-required="true"  placeholder="Material Thickness" max="1000" min="1"   value="25" data-parsley-trigger = "change" >
-                        <input id="Revs-val" type="number" max="1000" min="1"   value="25" data-parsley-trigger = "change">                     
-					  </div>
-					  <div class="pure-control-group">
-                        <label for="Resolution">Resolution (number of segments/revolution)</label>
-                        <input id="Resolution" type="range" step="1" data-parsley-required="true" placeholder="Hole Diameter" max="1000" min="2" value="175"  data-parsley-trigger = "change" >
-                        <input id="Resolution-val" type="number" max="1000" min="1" value="175"  data-parsley-trigger = "change">                      
-					  
-					  </div>
-					  <div class="pure-control-group">
-                        <label for="Size">Maximum Cut Size.</label>
-                        <input id="Size" type="number" step="0.01" max="1000" min="0.1" value="6"  data-parsley-trigger = "change" >
-                                          
-					  
-					  </div>
-         
-                      <div class="pure-control-group"> 
-						<label for="insideoutside">Where should the Rolling Gear roll?</label> 
-                        <input type="radio" name= "insideoutside" id="radioOutside" value="Outside" checked> The outside of the ring gear? <img id="outsideHelp" src="images/help.png">
-						
-                        <input type="radio" name= "insideoutside" id="radioInside" value="inside"> The inside of the ring gear?	<img  id="insideHelp" src="images/help.png">					
-                      </div>
-					  
-					 </div> <!-- /basic -->
-
-                    <div class="advanced start-hidden">
-                      <div class="pure-control-group"> 
-                        <label for="feed-rate">Cut Speed</label>
-                        <input class="lockable" id="CutSpeed" type="number" step="0.1"  max="6" min="0.1" value="2"  data-parsley-trigger = "change">
-                      </div>
-                      <div class="pure-control-group"> 
-                        <label for="CutDepth">Cut Depth</label>
-                        <input  id="CutDepth" type="number" step="0.01"  max="5" min="-5"   value="-0.05"  data-parsley-trigger = "change">
-                      </div>
-                      <div class="pure-control-group"> 
-                        <label for="SafeZ">Safe Z (in)</label>
-                        <input id="SafeZ" type="number" step="0.05" max="6" min="0" value=".25"  data-parsley-trigger = "change">
-                      </div>  
+                  <div class="advanced start-hidden">
+                    <div class="pure-control-group">
+                      <label for="feed-rate">Cut Speed</label>
+                      <input class="lockable" id="CutSpeed" type="number" step="0.1"  max="6" min="0.1" value="2"  data-parsley-trigger = "change">
+                    </div>
+                    <div class="pure-control-group">
+                      <label for="CutDepth">Cut Depth</label>
+                      <input  id="CutDepth" type="number" step="0.01"  max="5" min="-5"   value="-0.05"  data-parsley-trigger = "change">
+                    </div>
+                    <div class="pure-control-group">
+                      <label for="SafeZ">Safe Z (in)</label>
+                      <input id="SafeZ" type="number" step="0.05" max="6" min="0" value=".25"  data-parsley-trigger = "change">
+                    </div>
                     <div style="margin-top: 10px;">
                       <button  id="submit" type='submit' >Submit</button>
-                    </div>					
-					<!-- advanced -->
-					  
                     </div>
+				<!-- advanced -->
+                  </div>
+                </fieldset>
+              </form>
 
-					
-
-
-                   
-
-                  </fieldset>
-                </form>
-             
-              </div>
-           </div>
-        </div>
+            </div>
+         </div>
+      </div>
       <div class='modal'>
         <div class='modal-content'>
           <p></p>
-          <button class="exit-modal" >Okay</button>
+          <div class="exit">
+            <button class="exit-modal" >Okay</button>
+          </div>
         </div>
       </div>
       <div class='modal-container'></div>
     </div>
-       
+
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/fabmo.js"></script>
 	<script type="text/javascript">
 		var fabmo = new FabMoDashboard();
 	</script>
     <script src="js/lib/parsley.min.js"></script>
-    <script src="js/drawSpiro.js"></script>	
+    <script src="js/drawSpiro.js"></script>
 
   </body>
 </html>
