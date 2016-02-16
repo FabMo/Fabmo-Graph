@@ -87,39 +87,39 @@ $('.exit-modal, .modal-container').on('click', function() {
   $('.settings').show();
 });
 
-$('#ringHelp, .help-q, .help-i').on('click', function(){
+$('#ringHelp').on('click', function(){
     $('.modal p').html('<img src="images/ring.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
-$('#rollingHelp, .help-i').on('click', function(){
-    $('.modal-content p').html('<img src="images/rolling.jpg">');
+$('#rollingHelp').on('click', function(){
+    $('.modal p').html('<img src="images/rolling.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
-$('#offsetHelp, .help-i').on('click', function(){
+$('#offsetHelp').on('click', function(){
     $('.modal-content p').html('<img src="images/offset.jpg">');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
 
-$('#revsHelp, .help-i').on('click', function(){
+$('#revsHelp').on('click', function(){
     $('.modal-content p').html('The number of complete revolutions, inside or outside the rolling gear. ');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
-$('#resHelp, .help-i').on('click', function(){
+$('#resHelp').on('click', function(){
     $('.modal-content p').html('The number of points recorded during each revolution. Try a very small number to see some interesting patterns');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
       // $('.settings').hide();
 });
 
-$('#cutSizeHelp, .help-i').on('click', function(){
+$('#cutSizeHelp').on('click', function(){
     $('.modal-content p').html('The nominal size you want the cutting to be. Note that this will vary depending on the depth of cut and the shape of the pattern. ');
     	 $('.modal, .modal-container').fadeIn();
 			 $('.modal-content img').css({'height': '400'});
