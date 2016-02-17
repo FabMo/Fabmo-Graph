@@ -16,6 +16,15 @@ $('.advanced-link').on('click', function (){
 	$('.advanced + ul').show();
 	$('.basic + ul').hide();
 });
+$('#CutVals').on('click', function (){
+    $('.basic').hide();
+	$('.advanced').show();
+	$('.advanced').attr("disabled", "true");
+	$('.parsley-required').hide();
+	$('.advanced + ul').show();
+	$('.basic + ul').hide();
+});
+
 $('#Resolution').on('change', function(){
     $('#Resolution-val').val($('#Resolution').val());
      draw ();
