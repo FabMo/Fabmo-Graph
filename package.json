@@ -2,7 +2,7 @@
   "name": "ShopBot-O-Graph",
   "main": "./index.html",
   "icon": "icon.png",
-  "icon_color": "black",
+  "icon_color": "white",
   "version": "0.0.1",
   "author": "Bill Young",
   "website": "http://www.shopbottools.com",

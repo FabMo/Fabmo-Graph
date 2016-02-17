@@ -29,29 +29,39 @@ $('#Resolution-val').on('change', function(){
 $('#Ring-gear').on('change', function(){
 
     $('#Ring-gear-val').val($('#Ring-gear').val());
-	if ($('#radioInside').prop('checked')) {
+	   if ($('#radioInside').prop('checked')) {
 		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
 		$('#Rolling-gear-val').val($('#Rolling-gear').val());
-		};
+		}
+        else {
+             $('#Rolling-gear').attr('max', 999);
+            $('#Rolling-gear-val').attr('max', 999);
+            
+        }
          draw ();
 });
 
 $('#Ring-gear-val').on('change', function(){
     $('#Ring-gear').val($('#Ring-gear-val').val());
 	if ($('#radioInside').prop('checked')) {
-		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
-		$('#Rolling-gear-val').val($('#Rolling-gear').val());
-		};
+		$('#Rolling-gear').attr('max', parseFloat($('#Ring-gear').val()- 1));
+		$('#Rolling-gear-val').attr('max', parseFloat($('#Ring-gear').val()- 1));  
+         $('#Rolling-gear').val(parseFloat($('#Ring-gear').val()- 1)); 
+         $('#Rolling-gear-val').val($('#Rolling-gear').val());    
+		}
+         else {
+             $('#Rolling-gear').attr('max', 999);
+            $('#Rolling-gear-val').attr('max', 999);
+            
+        }
          draw ();
 });
 
 
 $('#Rolling-gear').on('change', function(){
-	if ($('#radioInside').prop('checked')) {
-		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
-		};
+
     $('#Rolling-gear-val').val($('#Rolling-gear').val());
-     draw ();
+    draw ();
 
 });
 $('#Rolling-gear-val').on('change', function(){
@@ -142,26 +152,38 @@ $('#insideHelp').on('click', function(){
 
 
 $('#radioInside').on('change', function(){
+
 	if ($('#radioInside').prop('checked')) {
-		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+		$('#Rolling-gear').attr('max', parseFloat($('#Ring-gear').val()- 1));
+		$('#Rolling-gear-val').attr('max', parseFloat($('#Ring-gear').val()- 1));  
+         $('#Rolling-gear').val(parseFloat($('#Ring-gear').val()- 1)); 
+         $('#Rolling-gear-val').val($('#Rolling-gear').val());     
+        console.log("changed Inside")
 		}
         else {
-           $('#Rolling-gear').attr('max', 150);
-        }
-	$('#Rolling-gear-val').val($('#Rolling-gear').val());
+           $('#Rolling-gear').attr('max', 999);
+           $('#Rolling-gear-val').attr('max', 999);  
+         console.log("changed Outside")                  
+        }	
     draw ();
 });
 
 $('#radioOutside').on('change', function(){
-	if ($('#radioInside').prop('checked')) {
-		$('#Rolling-gear').attr('max', $('#Ring-gear').val()- 1);
+
+	if ($('#radioOutside').prop('checked')) {
+        $('#Rolling-gear').attr('max', 999);
+        $('#Rolling-gear-val').attr('max', 999);  
+        console.log("changed Outside");      
+        
 		}
         else {
+       $('#Rolling-gear').attr('max', parseFloat($('#Ring-gear').val()- 1));
+       $('#Rolling-gear-val').attr('max', parseFloat($('#Ring-gear').val()- 1));   
+         $('#Rolling-gear').val(parseFloat($('#Ring-gear').val()- 1)); 
+         $('#Rolling-gear-val').val($('#Rolling-gear').val());      
 
-           $('#Rolling-gear').attr('max', 150);
-        }
-
-	$('#Rolling-gear-val').val($('#Rolling-gear').val());
+        console.log("changed Inside");    
+        }	
     draw ();
 });
 
@@ -192,13 +214,13 @@ $('#radioOutside').on('change', function(){
 			var width = window.innerWidth;
 		}
 
-		console.log('width'+ width);
+		//console.log('width'+ width);
 		var ratio = worksheetCanvas.height()/worksheetCanvas.width();
 
 		var height = width;
-		console.log('height'+ height);
-			worksheetCanvas.width(width)
-			worksheetCanvas.height(height)
+		//console.log('height'+ height);
+			worksheetCanvas.width(width-25)
+			worksheetCanvas.height(height-25)
 	}
 
 	window.addEventListener('load', resizeCanvas, false);
@@ -207,8 +229,8 @@ $('#radioOutside').on('change', function(){
 
 	SpiroPrev.clearRect(0, 0, previewWindow, previewWindow);	// clear the preview before every redraw
 
-	var screenoffsetX = previewWindow / 2
-	var screenoffsetY = previewWindow / 2
+	var screenoffsetX = (previewWindow / 2) 
+	var screenoffsetY = (previewWindow / 2) 
 
 	var HasRun = 0
 	var MaxValue = 0 //not currently used
@@ -238,7 +260,7 @@ $('#radioOutside').on('change', function(){
 		}
 
 	var CutScaleFactor = CutSize / ((GearOffset + Rolling + Offset)*2);
-	var PrevScaleFactor = previewWindow / ((GearOffset + Rolling + Offset)*2);
+	var PrevScaleFactor = (previewWindow - 25) / ((GearOffset + Rolling + Offset)*2);
 
 
 	headerCode = [
@@ -246,13 +268,14 @@ $('#radioOutside').on('change', function(){
         "' Copyright 2016 Bill Young and ShopBot Tools ",
         "'",
         "' Pattern is centered at 0,0",
-        "' and is " + CutSize + " in diameter",
+        "' and is approximately" + CutSize + " in diameter",
         "'",
         "' Ring gear radius... " + Ring,
         "' Rolling gear radius... " + Rolling,
         "' Offset %... " + Offset,
         "' # of revolutions... " + Revs,
         "' # of line segments per revolution... " + Resolution,
+        
         "'",
 		"MZ," + SafeZ,
 		"MS," + CutSpeed,
@@ -291,7 +314,8 @@ $('#radioOutside').on('change', function(){
 			SpiroPrev.beginPath();
 			SpiroPrev.moveTo((PreviousX * PrevScaleFactor) + screenoffsetX, (PreviousY * PrevScaleFactor) + screenoffsetY);
 			SpiroPrev.lineTo((XCoord * PrevScaleFactor) + screenoffsetX, (YCoord *PrevScaleFactor) + screenoffsetY);
-			SpiroPrev.strokeStyle = "rgb(180,180,180)";
+			SpiroPrev.strokeStyle = "rgb(0,0,0)";
+            //SpiroPrev.lineWidth =5;
 			SpiroPrev.stroke();
 			PreviousX = XCoord;
 			PreviousY = YCoord;

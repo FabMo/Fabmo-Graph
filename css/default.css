@@ -108,11 +108,12 @@ canvas{
 }
 label{
 	display: block;
-    padding-bottom: 5px;
+    padding-bottom: 1px;
+    font-weight: bold;
 }
 input{
 	margin: 5px 1em 20px 1em;
-    font-size: .85em;
+    font-size: 1em;
 }
 #submit {
 	width: 33%;
@@ -130,7 +131,7 @@ input{
 .content{
 	padding-top: 1em;
 	padding-left: 1em;
-    font-size: .8em;
+    font-size: 1em;
 
 }
 
