@@ -252,7 +252,8 @@ $('#radioOutside').on('change', function(){
 	var Rolling = parseInt($('#Rolling-gear').val());
 	var Offset = (Rolling / 100) * parseFloat($('#Offset').val());
 	var Revs = parseFloat($('#Revs').val());
-	var CutSize = parseFloat($('#Size').val());
+	var CutSize = parseFloat($('#CutSize').val());
+console.log(CutSize)
 	var CutDepth = parseFloat($('#CutDepth').val());
     var CutSpeed = parseFloat($('#CutSpeed').val());
 
@@ -269,7 +270,108 @@ $('#radioOutside').on('change', function(){
 		}
 
 	var CutScaleFactor = CutSize / ((GearOffset + Rolling + Offset)*2);
+        console.log(CutSize)
 	var PrevScaleFactor = (previewWindow - 25) / ((GearOffset + Rolling + Offset)*2);
+
+
+/*	headerCode = [
+		"' File created by ShopBot-O-Graph v1.00",
+        "' Copyright 2016 Bill Young and ShopBot Tools ",
+        "'",
+        "' Pattern is centered at 0,0",
+        "' and is approximately" + CutSize + " in diameter",
+        "'",
+        "' Ring gear radius... " + Ring,
+        "' Rolling gear radius... " + Rolling,
+        "' Offset %... " + Offset,
+        "' # of revolutions... " + Revs,
+        "' # of line segments per revolution... " + Resolution,
+        
+        "'",
+		"MZ," + SafeZ,
+		"MS," + CutSpeed,
+        "SO,1,1",
+		"PAUSE 2",
+		"'"
+		];
+        */
+
+	var count
+	var XCoord
+	var YCoord
+	var PreviousX
+    var PreviousY
+	for (count = 0; count < Revs; count = (count + SegmentLength)) {
+
+        XCoord = (GearOffset * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((GearOffset / Rolling) * count))))
+        YCoord = 0 - ((GearOffset * Math.sin(count)) - (Rolling + Offset) * Math.sin(((GearOffset / Rolling) * count)))
+
+/*		Find extremes...not used anywhere so far
+        if (Math.abs(XCoord) > MaxValue) {
+			MaxValue = XCoord
+		}
+*/
+        if (HasRun == 0) {
+            PreviousX = XCoord
+            PreviousY = YCoord
+            HasRun = 1
+
+//			headerCode.push(
+////				"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY + CutScaleFactor).toFixed(3),
+//				"MZ," + CutDepth
+//				)
+			}
+		else{
+
+			SpiroPrev.beginPath();
+			SpiroPrev.moveTo((PreviousX * PrevScaleFactor) + screenoffsetX, (PreviousY * PrevScaleFactor) + screenoffsetY);
+			SpiroPrev.lineTo((XCoord * PrevScaleFactor) + screenoffsetX, (YCoord *PrevScaleFactor) + screenoffsetY);
+			SpiroPrev.strokeStyle = "rgb(0,0,0)";
+            //SpiroPrev.lineWidth =5;
+			SpiroPrev.stroke();
+			PreviousX = XCoord;
+			PreviousY = YCoord;
+//			headerCode.push(
+//			"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY * CutScaleFactor).toFixed(3)
+//			)
+
+			}
+
+        };
+	};
+ $('#submit').on('click', function (){
+     
+     var HasRun = 0
+	var MaxValue = 0 //not currently used
+    var GearOffset
+	var inside
+
+    var Resolution = parseInt($('#Resolution').val());
+	var SegmentLength = (Math.PI * 2) / Resolution
+	var Ring = parseInt($('#Ring-gear').val());
+	var Rolling = parseInt($('#Rolling-gear').val());
+	var Offset = (Rolling / 100) * parseFloat($('#Offset').val());
+	var Revs = parseFloat($('#Revs').val());
+	var CutSize = parseFloat($('#CutSize').val());
+console.log(CutSize)
+	var CutDepth = parseFloat($('#CutDepth').val());
+    var CutSpeed = parseFloat($('#CutSpeed').val());
+
+	SafeZ = parseFloat($('#SafeZ').val());
+
+    if ($('#radioInside').prop('checked')) {
+		inside = 1
+        GearOffset = Ring - Rolling
+		}
+		else
+		{
+        GearOffset = Ring + Rolling
+        inside = -1
+		}
+
+	var CutScaleFactor = CutSize / ((GearOffset + Rolling + Offset)*2);
+        console.log(CutSize)
+
 
 
 	headerCode = [
@@ -303,14 +405,9 @@ $('#radioOutside').on('change', function(){
         XCoord = (GearOffset * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((GearOffset / Rolling) * count))))
         YCoord = 0 - ((GearOffset * Math.sin(count)) - (Rolling + Offset) * Math.sin(((GearOffset / Rolling) * count)))
 
-/*		Find extremes...not used anywhere so far
-        if (Math.abs(XCoord) > MaxValue) {
-			MaxValue = XCoord
-		}
-*/
         if (HasRun == 0) {
             PreviousX = XCoord
-            PreviousY = YCoord
+             PreviousY = YCoord
             HasRun = 1
 
 			headerCode.push(
@@ -319,13 +416,6 @@ $('#radioOutside').on('change', function(){
 				)
 			}
 		else{
-
-			SpiroPrev.beginPath();
-			SpiroPrev.moveTo((PreviousX * PrevScaleFactor) + screenoffsetX, (PreviousY * PrevScaleFactor) + screenoffsetY);
-			SpiroPrev.lineTo((XCoord * PrevScaleFactor) + screenoffsetX, (YCoord *PrevScaleFactor) + screenoffsetY);
-			SpiroPrev.strokeStyle = "rgb(0,0,0)";
-            //SpiroPrev.lineWidth =5;
-			SpiroPrev.stroke();
 			PreviousX = XCoord;
 			PreviousY = YCoord;
 			headerCode.push(
@@ -335,8 +425,7 @@ $('#radioOutside').on('change', function(){
 			}
 
         };
-	};
- $('#submit').on('click', function (){
+	
 	 headerCode.push(
 	 "MZ," + SafeZ
 	 )

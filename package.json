@@ -1,10 +1,10 @@
 {
-  "name": "ShopBot-O-Graph",
+  "name": "Fab-Mo-Graph",
   "main": "./index.html",
   "icon": "icon.png",
   "icon_color": "white",
   "version": "0.0.1",
   "author": "Bill Young",
   "website": "http://www.shopbottools.com",
-  "description": "Make Spirograph patterns"
+  "description": "Make Spirograph patterns with Fabmo"
 }
