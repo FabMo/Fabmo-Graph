@@ -2,6 +2,7 @@ body {
 	font-family: sans-serif;
 	background-color:#E9E9E9;
 	color: #626366;
+    position: relative;
 }
 
 canvas{
@@ -155,36 +156,28 @@ input{
 
 .modal {
 	background-color: #eeeeee;
-	/*width: auto;
+	width: auto;
    	height: auto;
    	position: absolute;
-   	left: 50%;
-   	top: 50%;
-   	margin-left: -125px;
-   	margin-top: -125px;
-
-   	border-radius: 5px;*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   	border-radius: 5px;
 		z-index: 10;
 	display: none;
-	&:target {
-		&:before {
-			top:20%;
-		}
-	}
 }
 
 .modal-content {
 	background-color: #ffffff;
+    min-width: 300px;
 	/*width: auto;
   height: auto;*/
-  position: absolute;
-  left: 50%;
-  /*top: 50%;*/
-  /*margin-left: -110px;
-  margin-top: -110px;*/
-	margin-right: -50%;
-	transform: translate(-50%);
+ 	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 	border-radius: 5px;
+    text-overflow: wrap;
 }
 
 .modal-container{
