@@ -1,5 +1,6 @@
 var headerCode
 var SafeZ
+
 draw();
 $('.basic-link').on('click', function (){
 	$('.basic').show();
@@ -159,6 +160,19 @@ $('#insideHelp').on('click', function(){
       // $('.settings').hide();
 });
 
+$('#CenterHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/Center.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+			 $('.modal-content img').css({'height': '400'});
+      // $('.settings').hide();
+});
+
+$('#LowerLeftHelp').on('click', function(){
+    $('.modal-content p').html('<img src="images/LowerLeft.jpg">');
+    	 $('.modal, .modal-container').fadeIn();
+			 $('.modal-content img').css({'height': '400'});
+      // $('.settings').hide();
+});
 
 $('#radioInside').on('change', function(){
 
@@ -346,6 +360,7 @@ console.log(CutSize)
     var GearOffset
 	var inside
 
+ 
     var Resolution = parseInt($('#Resolution').val());
 	var SegmentLength = (Math.PI * 2) / Resolution
 	var Ring = parseInt($('#Ring-gear').val());
@@ -353,7 +368,8 @@ console.log(CutSize)
 	var Offset = (Rolling / 100) * parseFloat($('#Offset').val());
 	var Revs = parseFloat($('#Revs').val());
 	var CutSize = parseFloat($('#CutSize').val());
-console.log(CutSize)
+
+    var cutOffset = CutSize / 2
 	var CutDepth = parseFloat($('#CutDepth').val());
     var CutSpeed = parseFloat($('#CutSpeed').val());
 
@@ -368,6 +384,18 @@ console.log(CutSize)
         GearOffset = Ring + Rolling
         inside = -1
 		}
+        
+      if ($('#PatternCenter').prop('checked')) {
+		  cutOffset = 0
+          console.log("cutoffset = " + cutOffset)
+        
+		}
+		else
+		{
+           cutOffset = CutSize / 2
+           console.log("cutoffset = " + cutOffset)
+		}  
+        
 
 	var CutScaleFactor = CutSize / ((GearOffset + Rolling + Offset)*2);
         console.log(CutSize)
@@ -377,9 +405,22 @@ console.log(CutSize)
 	headerCode = [
 		"' File created by ShopBot-O-Graph v1.00",
         "' Copyright 2016 Bill Young and ShopBot Tools ",
-        "'",
-        "' Pattern is centered at 0,0",
-        "' and is approximately" + CutSize + " in diameter",
+        "'"
+        ];
+    if (cutOffset==0){
+        headerCode.push(
+        "' X and Y zero at the center of the pattern"
+        )
+    }
+        else{
+         headerCode.push(
+        "' X and Y zero at the Lower Left corner of the pattern"
+        )   
+            
+    }
+    
+        headerCode.push(
+        "' and is approximately " + CutSize + " in diameter",
         "'",
         "' Ring gear radius... " + Ring,
         "' Rolling gear radius... " + Rolling,
@@ -393,7 +434,7 @@ console.log(CutSize)
         "SO,1,1",
 		"PAUSE 2",
 		"'"
-		];
+        );
 
 	var count
 	var XCoord
@@ -402,8 +443,8 @@ console.log(CutSize)
     var PreviousY
 	for (count = 0; count < Revs; count = (count + SegmentLength)) {
 
-        XCoord = (GearOffset * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((GearOffset / Rolling) * count))))
-        YCoord = 0 - ((GearOffset * Math.sin(count)) - (Rolling + Offset) * Math.sin(((GearOffset / Rolling) * count)))
+        XCoord = (GearOffset * Math.cos(count)) + ((inside) * ((Rolling + Offset) * Math.cos(((GearOffset / Rolling) * count)))) 
+        YCoord = 0 - ((GearOffset * Math.sin(count)) - (Rolling + Offset) * Math.sin(((GearOffset / Rolling) * count))) 
 
         if (HasRun == 0) {
             PreviousX = XCoord
@@ -411,7 +452,7 @@ console.log(CutSize)
             HasRun = 1
 
 			headerCode.push(
-				"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY + CutScaleFactor).toFixed(3),
+				"M2," + ((PreviousX * CutScaleFactor) + cutOffset).toFixed(3) + "," + ((PreviousY + CutScaleFactor) + cutOffset).toFixed(3),
 				"MZ," + CutDepth
 				)
 			}
@@ -419,7 +460,7 @@ console.log(CutSize)
 			PreviousX = XCoord;
 			PreviousY = YCoord;
 			headerCode.push(
-			"M2," + (PreviousX * CutScaleFactor).toFixed(3) + "," + (PreviousY * CutScaleFactor).toFixed(3)
+			"M2," + ((PreviousX * CutScaleFactor) + cutOffset).toFixed(3) + "," + ((PreviousY * CutScaleFactor) + cutOffset).toFixed(3)
 			)
 
 			}
@@ -432,8 +473,8 @@ console.log(CutSize)
 	 var ShopBotCode = headerCode.join('\n');
 	 fabmo.submitJob({
             file: ShopBotCode,
-            filename : 'sbograph.sbp',
-            name : 'ShopBot-O-Graph',
+            filename : 'fabmograph.sbp',
+            name : 'Fabmo-Graph',
             description : 'Cut a Spirograph pattern'
         });
 //	 var ShopBotCode = headerCode.join('\n');

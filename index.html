@@ -78,18 +78,22 @@
         			
                     
                     <div class="pure-control-group">
+					
           			   <label for="insideoutside">Where should the Rolling Gear roll?</label>
+					   <div class="group-buttons">
                       <input type="radio" name="insideoutside" id="radioOutside" value="Outside" checked="" data-parsley-multiple="insideoutside" data-parsley-id="27"> Outside the ring gear? 
                       <div id="outsideHelp" class="help-i">
                         <p>i</p>
                       </div>
-                       <br>
-
+					  </div>
+                       
+				<div class="group-buttons">
                       <input type="radio" name="insideoutside" id="radioInside" value="inside" data-parsley-multiple="insideoutside"> Inside the ring gear?	
                        <div id="insideHelp" class="help-i">                     
                             <p>i</p>
                      
                       </div>
+					  </div>
                     <div style="margin-top: 10px;">
                       <button id="CutVals" type="submit">Set Cutting Values</button>
                     </div>
@@ -116,6 +120,23 @@
                       <label for="SafeZ">Safe Z</label>
                       <input id="SafeZ" type="number" step="0.05" max="6" min="0" value=".25" data-parsley-trigger="change" data-parsley-id="35">
                     </div>
+                     <div class="pure-control-group">
+					
+          			   <label for="XYZero">Where should the X and Y Zero point be?</label>
+					   <div class="group-buttons">
+                      <input type="radio" name="XYZero" id="PatternCenter" value="Center" checked="" data-parsley-multiple="XYZero" data-parsley-id="27"> The Center of the pattern? 
+                      <div id="CenterHelp" class="help-i">
+                        <p>i</p>
+                      </div>
+					  </div>
+                       
+				<div class="group-buttons">
+                      <input type="radio" name="XYZero" id="LowerLeft" value="Default" data-parsley-multiple="XYZero"> Lower left corner of pattern?	
+                       <div id="LowerLeftHelp" class="help-i">                     
+                            <p>i</p>
+                     
+                      </div>
+					  </div>
                     <div style="margin-top: 10px;">
                       <button id="submit" type="submit">Submit Job</button>
                     </div>
